@@ -19,7 +19,12 @@ public class CharacterMouvement : MonoBehaviour
     private Rigidbody m_rigidbody;
     private float m_previousSign;
     private float m_movementSign;
+    private CharacterGeneral m_characterGeneral;
 
+    public void Start()
+    {
+        m_characterGeneral = GetComponent<CharacterGeneral>();
+    }
 
     public void AxisMovemetInnput(InputAction.CallbackContext ctx)
     {
@@ -74,10 +79,11 @@ public class CharacterMouvement : MonoBehaviour
 
     public void Update()
     {
-        UpdateMouvement();
+      if(m_characterGeneral.IsOnGround())  UpdateMouvement();
     }
 
-    public Vector3 GetMouvementDirection() { return m_currentSpeed; }
+    public Vector3 GetMouvementSpeed() { return m_currentSpeed; }
+    public float GetMovementSign() { return m_currentSpeed.x == 0 ? 0:m_movementSign; }
 
 
 
