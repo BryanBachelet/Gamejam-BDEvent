@@ -1,34 +1,9 @@
 fileFormatVersion: 2
-guid: 222a7f5b431878046b22b1e38fdaa2ac
+guid: fd30449bdac923a42add186eb5963ea3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Cap
-    second: {fileID: 2100000, guid: df81c4fb70724254ead5e36803498a14, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Pants
-    second: {fileID: 2100000, guid: 547e3b3eb0d1ffb409bc235c43446da7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Shirt
-    second: {fileID: 2100000, guid: 97ae17d73ca254e4dab137d6713899c9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Shoes
-    second: {fileID: 2100000, guid: f75484946bd46594e9872ba130c317d8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Skin
-    second: {fileID: 2100000, guid: 898cb74af9bfdb34398ba5b18b420337, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -116,7 +91,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 0.027
-    rootMotionBoneName: mixamorig:Hips
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
@@ -124,7 +99,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

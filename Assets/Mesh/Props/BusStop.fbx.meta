@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 222a7f5b431878046b22b1e38fdaa2ac
+guid: c2f54f5bdd0e46d48ab86b84df6f8aa1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,28 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Cap
-    second: {fileID: 2100000, guid: df81c4fb70724254ead5e36803498a14, type: 2}
+      name: BusStopBench
+    second: {fileID: 2100000, guid: d1766d8e14f206f4ab8e134dabde9400, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Pants
-    second: {fileID: 2100000, guid: 547e3b3eb0d1ffb409bc235c43446da7, type: 2}
+      name: M_BusStopShape
+    second: {fileID: 2100000, guid: 0a8580b5684427c4094f9c17aa779729, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Shirt
-    second: {fileID: 2100000, guid: 97ae17d73ca254e4dab137d6713899c9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Shoes
-    second: {fileID: 2100000, guid: f75484946bd46594e9872ba130c317d8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Skin
-    second: {fileID: 2100000, guid: 898cb74af9bfdb34398ba5b18b420337, type: 2}
+      name: lambert1
+    second: {fileID: 2100000, guid: fbd5e7a9c60bb5a4c907e7d788516fb9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -116,7 +106,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 0.027
-    rootMotionBoneName: mixamorig:Hips
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
@@ -124,7 +114,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
