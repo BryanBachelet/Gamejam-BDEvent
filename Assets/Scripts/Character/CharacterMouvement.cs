@@ -20,12 +20,15 @@ public class CharacterMouvement : MonoBehaviour
     private float m_previousSign;
     private float m_movementSign;
     private CharacterGeneral m_characterGeneral;
+    private CharacterSneeze m_characterSneeze;
 
     public void Start()
     {
         m_characterGeneral = GetComponent<CharacterGeneral>();
+        m_characterSneeze = GetComponent<CharacterSneeze>();
     }
 
+    #region Input Functons
     public void AxisMovemetInnput(InputAction.CallbackContext ctx)
     {
         if (ctx.canceled)
@@ -40,10 +43,14 @@ public class CharacterMouvement : MonoBehaviour
             m_movementSign = m_movementInputValue.x;
         }
     }
+    
+    #endregion
+
+
 
     public void UpdateMouvement()
     {
-        if (m_movementInputValue.x == 0)
+        if (m_movementInputValue.x == 0  || m_characterSneeze.IsSneezeInputPress)
         {
             m_currentSpeed.x -= deccelerationRun * Time.deltaTime;
 
@@ -79,11 +86,13 @@ public class CharacterMouvement : MonoBehaviour
 
     public void Update()
     {
-      if(m_characterGeneral.IsOnGround())  UpdateMouvement();
+      if(m_characterGeneral.IsOnGround()) 
+            UpdateMouvement();
     }
 
     public Vector3 GetMouvementSpeed() { return m_currentSpeed; }
     public float GetMovementSign() { return m_currentSpeed.x == 0 ? 0:m_movementSign; }
+   
 
 
 
