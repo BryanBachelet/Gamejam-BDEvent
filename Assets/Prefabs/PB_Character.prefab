@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643a2bb496576184e92980b49bac2221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceGroundTest: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -338,6 +339,8 @@ MonoBehaviour:
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  accelerationAirControl: 15
+  maxSpeedAirControl: 5
   m_currentSpeed: {x: 0, y: 0, z: 0}
 --- !u!114 &1655487445843345919
 MonoBehaviour:
@@ -488,12 +491,18 @@ MonoBehaviour:
   power: 50
   decceleration: 20
   currentForce: {x: 0, y: 0, z: 0}
+  maxPowerSneeze: 70
+  minPowerSneeze: 40
+  timeToReloadSneezeBar: 10
+  m_currentSneezePower: 0
   sneezeTimer: 0
-  m_maxInclusive: 7
+  m_maxInclusive: 15
   m_minInclusive: 1
   m_characterArrow: {fileID: 0}
   rigidbodyChara: {fileID: 0}
-  m_isAllowRandomSneeze: 1
+  sneezeImage: {fileID: 0}
+  IsSneezeInputPress: 0
+  m_isAllowRandomSneeze: 0
 --- !u!54 &8500283255658112756
 Rigidbody:
   m_ObjectHideFlags: 0
