@@ -110,14 +110,16 @@ public class CharacterSneeze : MonoBehaviour
     public void CallSneeze()
     {
         if (!m_characterGeneral.IsOnGround()) return;
-        currentForce = currentDirection.normalized * power;
+        currentForce = currentDirection.normalized * m_currentSneezePower;
+        m_currentSneezePower = 0.0f;
+        m_currentSneezePowerTimer = 0.0f;
         rigidbodyChara.AddForce(currentForce, ForceMode.Impulse);
     }
 
     public void CallSneeze(Vector3 direction)
     {
         if (!m_characterGeneral.IsOnGround()) return;
-        currentForce = direction.normalized * power;
+        currentForce = direction.normalized * m_currentSneezePower;
         rigidbodyChara.AddForce(currentForce, ForceMode.Impulse);
     }
 
@@ -130,7 +132,7 @@ public class CharacterSneeze : MonoBehaviour
         SneezeUIFeedback();
         ReloadSneeze();
 
-        sneezeImage.fillAmount = m_currentSneezePowerTimer / timeToReloadSneezeBar;
+        sneezeImage.material.SetFloat("_Fill" , m_currentSneezePowerTimer / timeToReloadSneezeBar);
     }
 
     public void SneezeUIFeedback()
