@@ -15,14 +15,19 @@ public class CharacterSneeze : MonoBehaviour
     [SerializeField] private float m_minInclusive = 1.0f;
 
 
+
+
     private float m_sneezeCounter;
+    public UI_CharacterArrow m_characterArrow;
     public Rigidbody rigidbodyChara;
 
     private Vector3 currentDirection;
+    private Vector3 inputDirection;
     private CharacterGeneral m_characterGeneral;
     private MeshRenderer m_meshRenderer;
     private Material m_characterMaterial;
 
+    private bool m_isSneezeInputPress;
     [Header("Info Sneeze")]
     [SerializeField] private bool m_isAllowRandomSneeze  = true;
 
@@ -32,6 +37,9 @@ public class CharacterSneeze : MonoBehaviour
         m_meshRenderer = GetComponent<MeshRenderer>();
         m_characterMaterial = m_meshRenderer.material;
         sneezeTimer = Random.Range(m_minInclusive, m_maxInclusive);
+        rigidbodyChara = GetComponent<Rigidbody>();
+        m_characterArrow = GetComponentInChildren<UI_CharacterArrow>();
+        m_characterArrow.gameObject.SetActive(false);
     }
 
     #region  Input Functions
@@ -40,7 +48,17 @@ public class CharacterSneeze : MonoBehaviour
     {
         if (ctx.performed)
         {
-            CallSneeze();
+            m_isSneezeInputPress = true;
+           
+        }
+        if(ctx.canceled)
+        {
+            if(m_isSneezeInputPress)
+            {
+                m_characterArrow.gameObject.SetActive(false);
+                CallSneeze();
+            }
+            m_isSneezeInputPress = false;
         }
 
     }
@@ -52,8 +70,11 @@ public class CharacterSneeze : MonoBehaviour
         {
             currentDirection = ctx.ReadValue<Vector2>();
             currentDirection.y = Mathf.Clamp(currentDirection.y, -1, 0);
+            inputDirection = currentDirection;
             currentDirection = -currentDirection;
         }
+
+     
     }
 
     // Cheat Inputs 
@@ -82,12 +103,24 @@ public class CharacterSneeze : MonoBehaviour
         rigidbodyChara.AddForce(currentForce, ForceMode.Impulse);
     }
 
-    public void Update()
+    public void Update()    
     {
         if (!m_characterGeneral.IsOnGround() && rigidbodyChara.velocity.y < 0)
             rigidbodyChara.velocity += Vector3.down * Time.deltaTime * decceleration;
-
+            
         RandomSneeze();
+
+
+        if (m_characterGeneral.IsOnGround() && m_isSneezeInputPress)
+        {
+            m_characterArrow.gameObject.SetActive(true);
+            m_characterArrow.SetRotate(inputDirection, transform.position);
+        }
+        else
+        {
+            m_characterArrow.gameObject.SetActive(false);
+        }
+      
 
     }
 
