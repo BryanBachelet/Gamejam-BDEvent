@@ -4,32 +4,37 @@ using UnityEngine;
 
 public class CharacterGeneral : MonoBehaviour
 {
+
+    [SerializeField] private float distanceGroundTest = 1.0f;
+    private const float offsetGroundTest = 0.5f;
     public LayerMask groundLayer;
     private bool isGrounded = false;
 
-    public bool IsOnGround(float distance)
-    {
-        return Physics.Raycast(transform.position, Vector3.down, distance, groundLayer);
 
-    }
 
     public bool IsOnGround()
     {
         return isGrounded;
     }
-    private bool InternIsOnGround()
+    internal bool _IsOnGround()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayer);
-
-    }
-    public bool IsOnGround(out RaycastHit hit )
-    {
-        return Physics.Raycast(transform.position, Vector3.down,out hit, 1.1f, groundLayer);
+        bool isGrounded = Physics.Raycast(transform.position + Vector3.right * offsetGroundTest, Vector3.down, distanceGroundTest, groundLayer);
+        bool isGrounded2 = Physics.Raycast(transform.position + Vector3.right * -offsetGroundTest, Vector3.down, distanceGroundTest, groundLayer);
+        return isGrounded || isGrounded2; 
 
     }
 
     public void Update()
     {
-        isGrounded = InternIsOnGround();
+        isGrounded = _IsOnGround();
+    }
+
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawRay(transform.position + Vector3.right * offsetGroundTest, Vector3.down * distanceGroundTest);
+        Gizmos.DrawRay(transform.position + Vector3.right * -offsetGroundTest, Vector3.down * distanceGroundTest);
+
     }
 }
