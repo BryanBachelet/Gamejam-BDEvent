@@ -16,13 +16,15 @@ public class CharacterSneeze : MonoBehaviour
 
 
     private float m_sneezeCounter;
-    public Rigidbody rigidbody;
+    public Rigidbody rigidbodyChara;
 
-    private bool change;
     private Vector3 currentDirection;
     private CharacterGeneral m_characterGeneral;
     private MeshRenderer m_meshRenderer;
     private Material m_characterMaterial;
+
+    [Header("Info Sneeze")]
+    [SerializeField] private bool m_isAllowRandomSneeze  = true;
 
     public void Start()
     {
@@ -54,26 +56,36 @@ public class CharacterSneeze : MonoBehaviour
         }
     }
 
+    // Cheat Inputs 
+
+    public void InputStopSneeze(InputAction.CallbackContext ctx)
+    {
+        if(ctx.performed)
+        {
+            m_isAllowRandomSneeze = !m_isAllowRandomSneeze;
+        }
+    }
+
     #endregion
 
     public void CallSneeze()
     {
         if (!m_characterGeneral.IsOnGround()) return;
         currentForce = currentDirection.normalized * power;
-        rigidbody.AddForce(currentForce, ForceMode.Impulse);
+        rigidbodyChara.AddForce(currentForce, ForceMode.Impulse);
     }
 
     public void CallSneeze(Vector3 direction)
     {
         if (!m_characterGeneral.IsOnGround()) return;
         currentForce = direction.normalized * power;
-        rigidbody.AddForce(currentForce, ForceMode.Impulse);
+        rigidbodyChara.AddForce(currentForce, ForceMode.Impulse);
     }
 
     public void Update()
     {
-        if (!m_characterGeneral.IsOnGround() && rigidbody.velocity.y < 0)
-            rigidbody.velocity += Vector3.down * Time.deltaTime * decceleration;
+        if (!m_characterGeneral.IsOnGround() && rigidbodyChara.velocity.y < 0)
+            rigidbodyChara.velocity += Vector3.down * Time.deltaTime * decceleration;
 
         RandomSneeze();
 
@@ -82,6 +94,7 @@ public class CharacterSneeze : MonoBehaviour
 
     public void RandomSneeze()
     {
+        if (!m_isAllowRandomSneeze) return;
         if (m_sneezeCounter > sneezeTimer)
         {
             currentDirection = Vector3.down;

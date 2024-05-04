@@ -82,7 +82,8 @@ public class CharacterMouvement : MonoBehaviour
       if(m_characterGeneral.IsOnGround())  UpdateMouvement();
     }
 
-    public Vector3 GetMouvementDirection() { return m_currentSpeed; }
+    public Vector3 GetMouvementSpeed() { return m_currentSpeed; }
+    public float GetMovementSign() { return m_currentSpeed.x == 0 ? 0:m_movementSign; }
 
 
 
