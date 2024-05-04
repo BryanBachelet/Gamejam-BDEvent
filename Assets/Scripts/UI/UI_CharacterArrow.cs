@@ -6,7 +6,7 @@ public class UI_CharacterArrow : MonoBehaviour
 {
     [SerializeField] private float spriteDistance =1;
     private RectTransform m_rectTransform;
-    public void Start()
+    public void Awake()
     {
         m_rectTransform = GetComponent<RectTransform>();
     }

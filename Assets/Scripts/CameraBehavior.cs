@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class CameraBehavior : MonoBehaviour
 {
-   
+
     [Header("Character Parameters")]
     public Transform target;
 
     public Vector2 offsetCameraInMovement;
-    public Vector2 baseOffset;
     public float distanceToTarget;
     public float triggerDistanceBox = 3;
-    public float lerpSpeedCameraMovement = 3;
-    [SerializeField] private float minLerpValueCameraOnMove = 0.1f;
 
-    private float cameraMovementTime = 1;
+    [SerializeField] float cameraMovementTime = 1;
     [SerializeField] private float timer;
 
     private CharacterMouvement m_characterMouvement;
     private CharacterSneeze m_characterSneeze;
     private CharacterGeneral m_characterGeneral;
+    private Rigidbody m_rigidbody;
 
     [Header("Infos Camera")]
     [SerializeField] private bool m_activeDebug;
@@ -30,12 +28,12 @@ public class CameraBehavior : MonoBehaviour
         m_characterMouvement = target.GetComponent<CharacterMouvement>();
         m_characterSneeze = target.GetComponent<CharacterSneeze>();
         m_characterGeneral = target.GetComponent<CharacterGeneral>();
+        m_rigidbody = GetComponent<Rigidbody>();
+        transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
     }
 
-    // Update is called once per frame
-    void Update()
+    public Vector2 ComputeOffset(float ratioOffset)
     {
-            Vector3 position = new Vector3();
         float sign = 0;
 
         Vector2 offsetValue = offsetCameraInMovement;
@@ -43,67 +41,71 @@ public class CameraBehavior : MonoBehaviour
         {
 
             sign = m_characterMouvement.GetMovementSign();
-            offsetValue *= sign;
-        }   
+            Vector3 dir = new Vector3(sign, 0, 0);
+            offsetValue = dir * offsetCameraInMovement.x * sign;
+        }
         else
         {
             sign = Mathf.Sign(m_characterSneeze.rigidbodyChara.velocity.x);
-            offsetValue *= m_characterSneeze.rigidbodyChara.velocity.normalized;
+            offsetValue = m_characterSneeze.rigidbodyChara.velocity.normalized;
+            offsetValue *= offsetCameraInMovement.x;
         }
 
-            Vector2 positionTarget = target.position;
-            positionTarget +=  offsetValue + baseOffset;
-            Vector2 positionCamera = transform.position;
+        return offsetValue * ratioOffset;
+    }
 
-            if (sign != 0)
-            {
-                if (timer / cameraMovementTime < minLerpValueCameraOnMove)
-                {
-                    timer += Time.deltaTime;
-                    timer = Mathf.Clamp(timer, 0, minLerpValueCameraOnMove);
-                }
+    public float ComputeRatioOffset(bool up)
+    {
 
-            }
-            else
-            {
-                if (Vector2.Distance(positionCamera, positionTarget) > .5f)
-                {
-                    if (timer < cameraMovementTime)
-                    {
-                        timer += Time.deltaTime;
-                    }
-                }
-                else
-                {
-                    timer = 0;
-                }
+        if (!up) timer -= Time.fixedDeltaTime;
+        else timer += Time.fixedDeltaTime;
 
-            }
+        timer = Mathf.Clamp(timer, 0, cameraMovementTime);
+
+        return timer / cameraMovementTime;
+    }
+
+    public void UpdateCameraMouvement(Vector2 offsetValue)
+    {
+        Vector3 position = new Vector3();
+
+        Vector2 positionTarget = target.position;
+        positionTarget += offsetValue;
+        Vector2 positionCamera = transform.position;
 
 
+        Vector2 pos2D = Vector2.Lerp(positionCamera, positionTarget, Time.fixedDeltaTime * 2);
 
+        position = pos2D;
+        position.z = -distanceToTarget;
+        SetCameraPosition(position);
+    }
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        float ratioOffset = 0;
+        Vector2 offsetValue = Vector2.zero;
 
-            Vector2 pos2D = Vector2.Lerp(positionCamera, positionTarget, timer / cameraMovementTime);
+        if (!IsOutsideCenter()) ratioOffset = ComputeRatioOffset(false);
+        else ratioOffset = ComputeRatioOffset(true);
 
-            position = pos2D;
-            position.z = -distanceToTarget;
-            SetCameraPosition(position);
+        offsetValue = ComputeOffset(ratioOffset);
+        UpdateCameraMouvement(offsetValue);
+    }
 
-        }
 
     public bool IsOutsideCenter()
     {
-        Vector2 positionTarget = target.position ;
+        Vector2 positionTarget = target.position;
         Vector2 positionCamera = transform.position;
 
         float resultDistance = Vector2.Distance(positionCamera, positionTarget);
-        Debug.Log("Result distance " + resultDistance.ToString());
-        return resultDistance > (triggerDistanceBox/2);
+        return resultDistance > (triggerDistanceBox);
     }
 
     public void SetCameraPosition(Vector3 position)
     {
-        transform.position = position;
+        m_rigidbody.MovePosition(position);
     }
 
     public void OnDrawGizmosSelected()
@@ -112,6 +114,12 @@ public class CameraBehavior : MonoBehaviour
 
         Gizmos.color = Color.green;
 
-        Gizmos.DrawWireCube(transform.position + Vector3.forward*distanceToTarget, new Vector3(triggerDistanceBox, triggerDistanceBox, 1));
+        Vector2 positionTarget = target.position;
+        Vector2 positionCamera = transform.position;
+        Gizmos.DrawLine(positionTarget, positionCamera);
+
+        Vector3 finalPos = positionCamera;
+
+        Gizmos.DrawWireCube(finalPos, new Vector3(triggerDistanceBox * 2, triggerDistanceBox * 2, 1));
     }
 }

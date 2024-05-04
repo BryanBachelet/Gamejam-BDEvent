@@ -27,7 +27,7 @@ public class CharacterSneeze : MonoBehaviour
     private MeshRenderer m_meshRenderer;
     private Material m_characterMaterial;
 
-    private bool m_isSneezeInputPress;
+    public bool IsSneezeInputPress;
     [Header("Info Sneeze")]
     [SerializeField] private bool m_isAllowRandomSneeze  = true;
 
@@ -48,17 +48,17 @@ public class CharacterSneeze : MonoBehaviour
     {
         if (ctx.performed)
         {
-            m_isSneezeInputPress = true;
+            IsSneezeInputPress = true;
            
         }
         if(ctx.canceled)
         {
-            if(m_isSneezeInputPress)
+            if(IsSneezeInputPress)
             {
                 m_characterArrow.gameObject.SetActive(false);
                 CallSneeze();
             }
-            m_isSneezeInputPress = false;
+            IsSneezeInputPress = false;
         }
 
     }
@@ -111,10 +111,10 @@ public class CharacterSneeze : MonoBehaviour
         RandomSneeze();
 
 
-        if (m_characterGeneral.IsOnGround() && m_isSneezeInputPress)
+        if (m_characterGeneral.IsOnGround() && IsSneezeInputPress)
         {
             m_characterArrow.gameObject.SetActive(true);
-            m_characterArrow.SetRotate(inputDirection, transform.position);
+          if(m_characterArrow)  m_characterArrow.SetRotate(inputDirection, transform.position);
         }
         else
         {
