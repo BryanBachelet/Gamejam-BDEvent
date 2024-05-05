@@ -2385,6 +2385,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558403871}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &600794044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 504226077158854697, guid: 4c7f69217f364484684e60a78195c955, type: 3}
+  m_PrefabInstance: {fileID: 5802183969990894865}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &640692604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2584,55 +2589,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660782836}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &715614131
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 715614133}
-  - component: {fileID: 715614132}
-  m_Layer: 0
-  m_Name: PP
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &715614132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 715614131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: db6b911b166223f43b938ae00a67835a, type: 2}
---- !u!4 &715614133
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 715614131}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.700119, y: 7.099834, z: -14.532399}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &743536666 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4082089413729104031, guid: 4c7f69217f364484684e60a78195c955, type: 3}
@@ -6403,6 +6359,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 3799254419843134851, guid: e874fdbbe8fb80a47a9a490233c00ebe, type: 3}
+      propertyPath: m_shakeYaw
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799254419843134851, guid: e874fdbbe8fb80a47a9a490233c00ebe, type: 3}
+      propertyPath: m_shakeRoll
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799254419843134851, guid: e874fdbbe8fb80a47a9a490233c00ebe, type: 3}
+      propertyPath: m_shakePitch
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799254419843134851, guid: e874fdbbe8fb80a47a9a490233c00ebe, type: 3}
+      propertyPath: m_shakeAmount
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 4220708218962366205, guid: e874fdbbe8fb80a47a9a490233c00ebe, type: 3}
       propertyPath: target
       value: 
@@ -8428,11 +8400,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072336451}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2100790704 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8491712260247719067, guid: 5d1cb0fecae9ca94cbe8c1c6c35dec8a, type: 3}
-  m_PrefabInstance: {fileID: 8340371122411493000}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2134822579
 GameObject:
   m_ObjectHideFlags: 0
@@ -9089,6 +9056,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PB_Character
       objectReference: {fileID: 0}
+    - target: {fileID: 5452630682360379025, guid: 4c7f69217f364484684e60a78195c955, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452630682360379025, guid: 4c7f69217f364484684e60a78195c955, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.905949
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452630682360379025, guid: 4c7f69217f364484684e60a78195c955, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.57924527
+      objectReference: {fileID: 0}
     - target: {fileID: 6752586901688981960, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -9139,7 +9118,7 @@ PrefabInstance:
       objectReference: {fileID: 961202698}
     - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: sneezeTimer
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: m_minInclusive
@@ -9154,13 +9133,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 743536667}
     - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
+      propertyPath: timeBeforSneeze
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: m_characterArrow
       value: 
       objectReference: {fileID: 553549639}
     - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: m_vfxSneezeLoading
       value: 
-      objectReference: {fileID: 2100790704}
+      objectReference: {fileID: 600794044}
+    - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
+      propertyPath: multiplicatorInputPressForTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9106974783916355519, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: maxRunSpeed
       value: 5
@@ -9430,4 +9417,3 @@ SceneRoots:
   - {fileID: 3877187147336263265}
   - {fileID: 4430784649895473182}
   - {fileID: 536509288}
-  - {fileID: 715614133}
