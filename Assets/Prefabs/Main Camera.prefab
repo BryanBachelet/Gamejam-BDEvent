@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7899961230878537092}
   - component: {fileID: 7501814772653804129}
   - component: {fileID: 4220708218962366205}
+  - component: {fileID: 6526247821655942922}
+  - component: {fileID: 3799254419843134851}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -43,8 +45,8 @@ Camera:
   m_GameObject: {fileID: 3435258271341438415}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0.47193998, b: 0.745283, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -106,11 +108,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  offsetCameraInMovement: {x: 5, y: 0}
-  baseOffset: {x: 0, y: 6}
-  distanceToTarget: 20
-  triggerDistanceBox: 20
-  lerpSpeedCameraMovement: 3
-  minLerpValueCameraOnMove: 0.008333335
+  offsetCameraInMovement: {x: 15, y: 0}
+  mindistanceToTarget: 20
+  maxDistanceTarget: 30
+  triggerDistanceBox: 5
+  maxShakeDuration: 1
+  cameraMovementTime: 1
   timer: 0
   m_activeDebug: 1
+--- !u!54 &6526247821655942922
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435258271341438415}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &3799254419843134851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435258271341438415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d83d15ebfa45b749a7ee14cb6a13ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_shakeAmount: 0.5
+  m_shakeYaw: 5
+  m_shakeRoll: 5
+  m_shakePitch: 5
+  m_shakeOffsetX: 5
+  m_shakeOffsetY: 5
+  m_shakeOffsetZ: 5
