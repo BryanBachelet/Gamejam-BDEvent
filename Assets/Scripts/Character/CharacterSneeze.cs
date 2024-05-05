@@ -15,7 +15,7 @@ public class CharacterSneeze : MonoBehaviour
     [Header("Sneeze Power")]
     public float maxPowerSneeze = 10;
     public float minPowerSneeze = 10;
-    public float timeToReloadSneezeBar =1 ;
+    public float timeToReloadSneezeBar = 1;
     public float multiplicatorInputPressForTime;
 
     private float m_currentSneezePowerTimer = 0.0f;
@@ -49,9 +49,11 @@ public class CharacterSneeze : MonoBehaviour
     public Image sneezeImage;
     public bool IsSneezeInputPress;
     [Header("Info Sneeze")]
-    [SerializeField] private bool m_isAllowRandomSneeze  = true;
+    [SerializeField] private bool m_isAllowRandomSneeze = true;
 
-  public System.Action<float> m_sneezeEvent;
+    public System.Action<float> m_sneezeEvent;
+
+    public Animator m_meshAnimator;
 
     public void Start()
     {
@@ -79,11 +81,11 @@ public class CharacterSneeze : MonoBehaviour
         if (ctx.performed)
         {
             IsSneezeInputPress = true;
-           
+
         }
-        if(ctx.canceled)
+        if (ctx.canceled)
         {
-            if(IsSneezeInputPress)
+            if (IsSneezeInputPress)
             {
                 m_characterArrow.gameObject.SetActive(false);
                 CallSneeze();
@@ -102,21 +104,21 @@ public class CharacterSneeze : MonoBehaviour
             currentDirection = currentDirection.normalized;
             float sign = Mathf.Sign(currentDirection.x);
 
-            currentDirection.x = sign* Mathf.Clamp(Mathf.Abs(currentDirection.x),  .10f,  1.0f);
-            
+            currentDirection.x = sign * Mathf.Clamp(Mathf.Abs(currentDirection.x), .10f, 1.0f);
+
             currentDirection.y = Mathf.Clamp(currentDirection.y, -1, -0.15f);
             inputDirection = -currentDirection;
             currentDirection = -currentDirection;
         }
 
-     
+
     }
 
     // Cheat Inputs 
 
     public void InputStopSneeze(InputAction.CallbackContext ctx)
     {
-        if(ctx.performed)
+        if (ctx.performed)
         {
             m_isAllowRandomSneeze = !m_isAllowRandomSneeze;
         }
@@ -147,9 +149,13 @@ public class CharacterSneeze : MonoBehaviour
 
     public IEnumerator LaunchSneeze(Vector3 dir)
     {
+
+        m_meshAnimator.SetTrigger("Jumping");
+        m_meshAnimator.ResetTrigger("Idle");
+        m_meshAnimator.ResetTrigger("Running");
         countdownBeforeSneeze = 0;
         beforSneeze = true;
-        m_sneezeSound.Play();   
+        m_sneezeSound.Play();
         while (countdownBeforeSneeze < timeBeforSneeze)
         {
             yield return Time.deltaTime;
@@ -158,20 +164,22 @@ public class CharacterSneeze : MonoBehaviour
 
         rigidbodyChara.AddForce(dir, ForceMode.Impulse);
         beforSneeze = false;
-      
+
+        m_meshAnimator.SetTrigger("OnAir");
+        m_meshAnimator.ResetTrigger("Jumping");
     }
 
 
-    public void Update()    
+    public void Update()
     {
         if (!m_characterGeneral.IsOnGround() && rigidbodyChara.velocity.y < 0)
             rigidbodyChara.velocity += Vector3.down * Time.deltaTime * decceleration;
-            
+
         RandomSneeze();
         SneezeUIFeedback();
         ReloadSneeze();
 
-        sneezeImage.material.SetFloat("_Fill" , m_currentSneezePowerTimer / timeToReloadSneezeBar);
+        sneezeImage.material.SetFloat("_Fill", m_currentSneezePowerTimer / timeToReloadSneezeBar);
     }
 
     public void SneezeUIFeedback()
@@ -201,7 +209,7 @@ public class CharacterSneeze : MonoBehaviour
 
             if (IsSneezeInputPress && m_characterGeneral.IsOnGround()) m_currentSneezePowerTimer += Time.deltaTime * multiplicatorInputPressForTime;
             else m_currentSneezePowerTimer += Time.deltaTime;
-            m_currentSneezePower = Mathf.Lerp(minPowerSneeze,maxPowerSneeze, m_currentSneezePowerTimer / timeToReloadSneezeBar);
+            m_currentSneezePower = Mathf.Lerp(minPowerSneeze, maxPowerSneeze, m_currentSneezePowerTimer / timeToReloadSneezeBar);
         }
 
     }
@@ -211,7 +219,7 @@ public class CharacterSneeze : MonoBehaviour
         if (!m_isAllowRandomSneeze || !m_characterGeneral.IsOnGround())
         {
             m_vfxSneezeLoading.SetActive(false);
-            m_sneezeCounter = sneezeTimer - 2;
+            if (m_sneezeCounter > sneezeTimer - 2) m_sneezeCounter = sneezeTimer - 2;
             return;
         }
 
@@ -227,18 +235,27 @@ public class CharacterSneeze : MonoBehaviour
         }
         else
         {
-            if(m_sneezeCounter>sneezeTimer-2)
+            if (m_sneezeCounter > sneezeTimer - 2)
             {
 
-                if(!m_vfxSneezeLoading.activeSelf)
+                if (!m_vfxSneezeLoading.activeSelf)
                 {
                     m_vfxSneezeLoading.SetActive(true);
                     m_vfxSneezeLoading.GetComponent<ParticleSystem>().Play();
                 }
-            
+
             }
 
-           m_sneezeCounter += Time.deltaTime;
+            if (m_vfxSneezeLoading.activeSelf)
+            {
+                float ratioVFX = (m_sneezeCounter - (sneezeTimer - 2)) / sneezeTimer;
+
+                ParticleSystem.EmissionModule em = m_vfxSneezeLoading.GetComponent<ParticleSystem>().emission;
+                em.rateOverTime = Mathf.Lerp(10, 200, ratioVFX);
+              
+            }
+
+                m_sneezeCounter += Time.deltaTime;
         }
     }
 
