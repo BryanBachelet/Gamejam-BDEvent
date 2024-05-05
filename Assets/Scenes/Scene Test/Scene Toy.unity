@@ -929,25 +929,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2473375075418748348, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: m_Pitch
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4082089413729104031, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: m_Name
       value: PB_Character
       objectReference: {fileID: 0}
-    - target: {fileID: 6217555702654754844, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: maxPitch
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217555702654754844, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: minPitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6217555702654754844, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: pitchRandom
-      value: 1
+    - target: {fileID: 5598417310916478748, guid: 4c7f69217f364484684e60a78195c955, type: 3}
+      propertyPath: spriteDistance
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6752586901688981960, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: m_LocalPosition.x
@@ -989,10 +977,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7839919602956205811, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: m_Camera
+    - target: {fileID: 8305124057109354943, guid: 4c7f69217f364484684e60a78195c955, type: 3}
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 8599319792442772588}
+      objectReference: {fileID: 21300000, guid: bb5a717d3b166964fbed1be83a6a615f, type: 3}
     - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: sneezeImage
       value: 
@@ -1063,11 +1051,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e874fdbbe8fb80a47a9a490233c00ebe, type: 3}
---- !u!20 &8599319792442772588 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7899961230878537092, guid: e874fdbbe8fb80a47a9a490233c00ebe, type: 3}
-  m_PrefabInstance: {fileID: 8599319792442772587}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

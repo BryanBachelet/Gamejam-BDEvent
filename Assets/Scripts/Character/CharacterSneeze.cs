@@ -39,6 +39,7 @@ public class CharacterSneeze : MonoBehaviour
 
     public float timeBeforSneeze = 0.25f;
     public float countdownBeforeSneeze = 0.0f;
+    public float endReloadBeforeSneeze = 0.5f;
     public bool beforSneeze = false;
 
     private float m_sneezeCounter;
@@ -59,6 +60,8 @@ public class CharacterSneeze : MonoBehaviour
     public System.Action<float> m_sneezeEvent;
 
     public Animator m_meshAnimator;
+    public ParticleSystem vfxSneeze;
+
 
     public void Start()
     {
@@ -172,6 +175,7 @@ public class CharacterSneeze : MonoBehaviour
 
         m_meshAnimator.SetTrigger("OnAir");
         m_meshAnimator.ResetTrigger("Jumping");
+        vfxSneeze.Play();
     }
 
 
@@ -214,7 +218,7 @@ public class CharacterSneeze : MonoBehaviour
 
             if (IsSneezeInputPress && m_characterGeneral.IsOnGround()) m_currentSneezePowerTimer += Time.deltaTime * multiplicatorInputPressForTime;
             else m_currentSneezePowerTimer += Time.deltaTime;
-            m_currentSneezePower = Mathf.Lerp(minPowerSneeze, maxPowerSneeze, m_currentSneezePowerTimer / timeToReloadSneezeBar);
+            m_currentSneezePower = Mathf.Lerp(minPowerSneeze, maxPowerSneeze, m_currentSneezePowerTimer / (timeToReloadSneezeBar- endReloadBeforeSneeze));
         }
 
     }
@@ -237,6 +241,7 @@ public class CharacterSneeze : MonoBehaviour
             m_currentSneezePower = 0.0f;
             m_currentSneezePowerTimer = 0.0f;
             m_vfxSneezeLoading.SetActive(false);
+            
         }
         else
         {
