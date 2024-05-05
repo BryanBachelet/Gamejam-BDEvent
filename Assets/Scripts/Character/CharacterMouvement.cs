@@ -34,6 +34,7 @@ public class CharacterMouvement : MonoBehaviour
 
     public GameObject vfxWalkPollenGO;
     public ParticleSystem vfxWalkWallGO;
+   
 
     [Header("Movement Sound")]
     public MultiIntruments walkInstrument;
@@ -179,7 +180,7 @@ public class CharacterMouvement : MonoBehaviour
 
         public void FixedUpdate()
         {
-            if (m_characterGeneral.IsOnGround() && !m_characterSneeze.beforSneeze || m_rigidbody.velocity.y < 2 && !m_characterSneeze.beforSneeze)
+            if (m_characterGeneral.IsOnGround() && !m_characterSneeze.beforSneeze )
             {
                 float signFace = Mathf.Sign(transform.position.x - prevPos.x);
                 float angle = signFace == -1 ? -90 : 110;
