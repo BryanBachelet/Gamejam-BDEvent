@@ -518,34 +518,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1164570613 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 504226077158854697, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-  m_PrefabInstance: {fileID: 5802183969990894865}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1177234537 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2562981546986209966, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-  m_PrefabInstance: {fileID: 5802183969990894865}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1493307338 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4082089413729104031, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-  m_PrefabInstance: {fileID: 5802183969990894865}
-  m_PrefabAsset: {fileID: 0}
---- !u!81 &1493307348
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1493307338}
-  m_Enabled: 1
---- !u!82 &1493307349 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 4249495351711617988, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-  m_PrefabInstance: {fileID: 5802183969990894865}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1741105762
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,11 +921,6 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
---- !u!1 &2141960752 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6376129326700337391, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-  m_PrefabInstance: {fileID: 5802183969990894865}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5802183969990894865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -965,10 +932,6 @@ PrefabInstance:
     - target: {fileID: 4082089413729104031, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: m_Name
       value: PB_Character
-      objectReference: {fileID: 0}
-    - target: {fileID: 4864139292874427275, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6752586901688981960, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1018,41 +981,10 @@ PrefabInstance:
       propertyPath: sneezeImage
       value: 
       objectReference: {fileID: 1028510884}
-    - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: m_sneezeSound
-      value: 
-      objectReference: {fileID: 1493307349}
-    - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: m_meshAnimator
-      value: 
-      objectReference: {fileID: 1177234537}
-    - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: m_vfxSneezeLoading
-      value: 
-      objectReference: {fileID: 1164570613}
-    - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: m_isAllowRandomSneeze
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8917924926640578600, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: multiplicatorInputPressForTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9106974783916355519, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: meshChara
-      value: 
-      objectReference: {fileID: 2141960752}
-    - target: {fileID: 9106974783916355519, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      propertyPath: m_meshAnimator
-      value: 
-      objectReference: {fileID: 1177234537}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4082089413729104031, guid: 4c7f69217f364484684e60a78195c955, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1493307348}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c7f69217f364484684e60a78195c955, type: 3}
 --- !u!1001 &8599319792442772587
 PrefabInstance:

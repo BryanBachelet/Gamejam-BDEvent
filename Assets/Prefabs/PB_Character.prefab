@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 8917924926640578600}
   - component: {fileID: 8500283255658112756}
   - component: {fileID: 4249495351711617988}
-  - component: {fileID: 8118180663445334528}
+  - component: {fileID: 5135300833871992385}
   m_Layer: 0
   m_Name: PB_Character
   m_TagString: Untagged
@@ -349,8 +349,8 @@ MonoBehaviour:
   accelerationAirControl: 15
   maxSpeedAirControl: 3
   m_currentSpeed: {x: 0, y: 0, z: 0}
-  meshChara: {fileID: 0}
-  m_meshAnimator: {fileID: 0}
+  meshChara: {fileID: 6376129326700337391}
+  m_meshAnimator: {fileID: 2562981546986209966}
   vfxWalkPollenGO: {fileID: 6633201027881317361}
   vfxWalkWallGO: {fileID: 5610922956287696680}
 --- !u!114 &1655487445843345919
@@ -521,7 +521,7 @@ MonoBehaviour:
   sneezeImage: {fileID: 0}
   IsSneezeInputPress: 0
   m_isAllowRandomSneeze: 1
-  m_meshAnimator: {fileID: 0}
+  m_meshAnimator: {fileID: 2562981546986209966}
 --- !u!54 &8500283255658112756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -645,7 +645,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!81 &8118180663445334528
+--- !u!81 &5135300833871992385
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -991,6 +991,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 222a7f5b431878046b22b1e38fdaa2ac, type: 3}
+--- !u!95 &2562981546986209966 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 222a7f5b431878046b22b1e38fdaa2ac, type: 3}
+  m_PrefabInstance: {fileID: 8285250620168748863}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8462728757889947860 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 222a7f5b431878046b22b1e38fdaa2ac, type: 3}
