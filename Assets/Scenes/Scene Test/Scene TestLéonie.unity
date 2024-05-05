@@ -1422,15 +1422,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb0e732b0686c6b4fb2b5f00555b2d0e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.46
+      value: -0.48
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb0e732b0686c6b4fb2b5f00555b2d0e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8660254
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb0e732b0686c6b4fb2b5f00555b2d0e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb0e732b0686c6b4fb2b5f00555b2d0e, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1442,7 +1442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb0e732b0686c6b4fb2b5f00555b2d0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -60
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb0e732b0686c6b4fb2b5f00555b2d0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -5135,6 +5135,10 @@ PrefabInstance:
     - target: {fileID: 9106974783916355519, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: deccelerationRun
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106974783916355519, guid: 4c7f69217f364484684e60a78195c955, type: 3}
+      propertyPath: maxSpeedAirControl
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9106974783916355519, guid: 4c7f69217f364484684e60a78195c955, type: 3}
       propertyPath: obstacleLayerMask.m_Bits
