@@ -1397,6 +1397,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 69.486
       objectReference: {fileID: 0}
+    - target: {fileID: 6306485957695269935, guid: 5d1cb0fecae9ca94cbe8c1c6c35dec8a, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306485957695269935, guid: 5d1cb0fecae9ca94cbe8c1c6c35dec8a, type: 3}
+      propertyPath: TrailModule.worldSpace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986804834209048921, guid: 5d1cb0fecae9ca94cbe8c1c6c35dec8a, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6986804834209048921, guid: 5d1cb0fecae9ca94cbe8c1c6c35dec8a, type: 3}
+      propertyPath: TrailModule.worldSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8491712260247719067, guid: 5d1cb0fecae9ca94cbe8c1c6c35dec8a, type: 3}
       propertyPath: m_Name
       value: VFX_Sneeze
@@ -1482,7 +1498,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2085891777639812466, guid: 886de194201cecd4a9563122948269c4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430537896562852077, guid: 886de194201cecd4a9563122948269c4, type: 3}
+      propertyPath: TrailModule.worldSpace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430537896562852077, guid: 886de194201cecd4a9563122948269c4, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430537896562852077, guid: 886de194201cecd4a9563122948269c4, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
