@@ -208,7 +208,6 @@ GameObject:
   - component: {fileID: 9106974783916355519}
   - component: {fileID: 1655487445843345919}
   - component: {fileID: 8917924926640578600}
-  - component: {fileID: 8500283255658112756}
   - component: {fileID: 5135300833871992385}
   - component: {fileID: 4553565623201621977}
   - component: {fileID: 1149197574112733402}
@@ -218,6 +217,7 @@ GameObject:
   - component: {fileID: 2617359689070674572}
   - component: {fileID: 6349628145028963535}
   - component: {fileID: 3039106603417326703}
+  - component: {fileID: 1512898437795936417}
   m_Layer: 0
   m_Name: PB_Character
   m_TagString: Untagged
@@ -346,9 +346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f321e9014d68443448dc733e75897e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationRun: 15
-  deccelerationRun: 15
-  maxRunSpeed: 5
+  accelerationRun: 30
+  deccelerationRun: 30
+  maxRunSpeed: 10
   stopDistance: 0.5
   obstacleLayerMask:
     serializedVersion: 2
@@ -490,7 +490,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 3776bcf1-a1fb-4fb5-90bb-696e79588443
-    m_ActionName: Player/New action
+    m_ActionName: Player/StopSneeze[/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -511,59 +511,32 @@ MonoBehaviour:
   power: 50
   decceleration: 20
   currentForce: {x: 0, y: 0, z: 0}
-  maxPowerSneeze: 70
+  maxPowerSneeze: 60
   minPowerSneeze: 40
   timeToReloadSneezeBar: 10
-  multiplicatorInputPressForTime: 3
+  multiplicatorInputPressForTime: 5
   m_currentSneezePower: 0
   m_sneezeSound: {fileID: 5782147547978720578}
   m_preSneezeSound: {fileID: 6217555702654754844}
   m_timerToPreSneeze: 2
   m_coutdownToPreSneeze: 0
   m_preFinalSneezeSound: {fileID: 6349628145028963535}
-  sneezeTimer: 0
+  sneezeTimer: 15
   m_maxInclusive: 10
-  m_minInclusive: 1
+  m_minInclusive: 5
   m_vfxSneezeLoading: {fileID: 504226077158854697}
-  timeBeforSneeze: 0.3
+  timeBeforSneeze: 0.15
   countdownBeforeSneeze: 0
   endReloadBeforeSneeze: 0.5
   beforSneeze: 0
-  m_characterArrow: {fileID: 0}
-  rigidbodyChara: {fileID: 0}
+  m_characterArrow: {fileID: 5598417310916478748}
+  rigidbodyChara: {fileID: 1512898437795936417}
   currentDirection: {x: 0, y: 0, z: 0}
   sneezeImage: {fileID: 0}
   IsSneezeInputPress: 0
   m_isAllowRandomSneeze: 1
   m_meshAnimator: {fileID: 2562981546986209966}
   vfxSneeze: {fileID: 3640651534195014703}
---- !u!54 &8500283255658112756
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4082089413729104031}
-  serializedVersion: 4
-  m_Mass: 3
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
 --- !u!81 &5135300833871992385
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1058,6 +1031,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &1512898437795936417
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4082089413729104031}
+  serializedVersion: 4
+  m_Mass: 3
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
 --- !u!1 &6376129326700337391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,6 +1178,22 @@ PrefabInstance:
     - target: {fileID: 1374802424367188726, guid: da9d58c814ae4b848a5bff2ce628ec1b, type: 3}
       propertyPath: m_Name
       value: VFX_SneezeLoading
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791634672091016270, guid: da9d58c814ae4b848a5bff2ce628ec1b, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791634672091016270, guid: da9d58c814ae4b848a5bff2ce628ec1b, type: 3}
+      propertyPath: EmissionModule.rateOverTime.minScalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791634672091016270, guid: da9d58c814ae4b848a5bff2ce628ec1b, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791634672091016270, guid: da9d58c814ae4b848a5bff2ce628ec1b, type: 3}
+      propertyPath: EmissionModule.rateOverTime.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7622471462818656340, guid: da9d58c814ae4b848a5bff2ce628ec1b, type: 3}
       propertyPath: m_LocalScale.x
