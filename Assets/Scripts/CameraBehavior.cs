@@ -9,8 +9,16 @@ public class CameraBehavior : MonoBehaviour
     public Transform target;
 
     public Vector2 offsetCameraInMovement;
-    public float distanceToTarget;
+    public float mindistanceToTarget;
+    public float maxDistanceTarget =40;
     public float triggerDistanceBox = 3;
+    public float maxShakeDuration = 1;
+
+    [Range(0, 1)] public float ratioSpeedDezoom;
+    public float airDezoomBonusDistance = 10;
+    [Range(0, 1)] public float ratioSpeedZoom;
+    public float airZoomBonusDistance = 10;
+
 
     [SerializeField] float cameraMovementTime = 1;
     [SerializeField] private float timer;
@@ -18,6 +26,7 @@ public class CameraBehavior : MonoBehaviour
     private CharacterMouvement m_characterMouvement;
     private CharacterSneeze m_characterSneeze;
     private CharacterGeneral m_characterGeneral;
+    private Render.Camera.CameraShake m_cameraShake;
     private Rigidbody m_rigidbody;
 
     [Header("Infos Camera")]
@@ -28,7 +37,9 @@ public class CameraBehavior : MonoBehaviour
         m_characterMouvement = target.GetComponent<CharacterMouvement>();
         m_characterSneeze = target.GetComponent<CharacterSneeze>();
         m_characterGeneral = target.GetComponent<CharacterGeneral>();
+        m_characterSneeze.m_sneezeEvent += ShakeCam;
         m_rigidbody = GetComponent<Rigidbody>();
+        m_cameraShake = GetComponent<Render.Camera.CameraShake>();
         transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
     }
 
@@ -37,7 +48,7 @@ public class CameraBehavior : MonoBehaviour
         float sign = 0;
 
         Vector2 offsetValue = offsetCameraInMovement;
-        if (m_characterGeneral.IsOnGround())
+        if (m_characterGeneral.IsOnGround() || !m_characterSneeze.beforSneeze)
         {
 
             sign = m_characterMouvement.GetMovementSign();
@@ -65,6 +76,12 @@ public class CameraBehavior : MonoBehaviour
         return timer / cameraMovementTime;
     }
 
+    public void ShakeCam(float ratio)
+    {
+
+        m_cameraShake.LaunchShake(maxShakeDuration * ratio);
+    }
+
     public void UpdateCameraMouvement(Vector2 offsetValue)
     {
         Vector3 position = new Vector3();
@@ -76,9 +93,16 @@ public class CameraBehavior : MonoBehaviour
 
         Vector2 pos2D = Vector2.Lerp(positionCamera, positionTarget, Time.fixedDeltaTime * 2);
 
+        float ratio = (m_characterSneeze.m_currentSneezePower - m_characterSneeze.minPowerSneeze) / (m_characterSneeze.maxPowerSneeze - m_characterSneeze.minPowerSneeze);
+        float depthDistance = -Mathf.Lerp(mindistanceToTarget, maxDistanceTarget,ratio );
         position = pos2D;
-        position.z = -distanceToTarget;
-        SetCameraPosition(position);
+        float finalDepth = m_characterGeneral.IsOnGround() ? Mathf.Lerp(transform.position.z, depthDistance, 0.1f) :  Mathf.Lerp(transform.position.z, -maxDistanceTarget-airDezoomBonusDistance, ratioSpeedDezoom);
+       
+        if(m_characterSneeze.beforSneeze) finalDepth = Mathf.Lerp(transform.position.z, -mindistanceToTarget + airZoomBonusDistance, m_characterSneeze.countdownBeforeSneeze/m_characterSneeze.timeBeforSneeze);
+        position.z = finalDepth;
+
+        SetCameraPosition(position + m_cameraShake.GetEffectPos());
+        SetCameraRotation();
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -106,6 +130,12 @@ public class CameraBehavior : MonoBehaviour
     public void SetCameraPosition(Vector3 position)
     {
         m_rigidbody.MovePosition(position);
+    }
+
+    public void SetCameraRotation()
+    {
+        Quaternion rot =  Quaternion.Euler(m_cameraShake.GetEffectRot());
+        m_rigidbody.MoveRotation(rot);
     }
 
     public void OnDrawGizmosSelected()

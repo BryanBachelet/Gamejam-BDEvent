@@ -68,7 +68,7 @@ Shader "Unlit/ProgressBar"
                 float mask = i.uv.x < _Fill;
 
 			
-                float4 finalColor = _Color * colMask + transparent *(1.0f-colMask);
+                float4 finalColor = col * colMask + transparent *(1.0f-colMask);
                 float4 outColor  = lerp(colorMask, finalColor,mask);
                 outColor.a =col.a* (mask + 1-col);
                 return outColor;

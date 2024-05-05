@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,10 @@ public class CharacterSneeze : MonoBehaviour
     public GameObject m_vfxSneezeLoading;
 
 
+    public float timeBeforSneeze = 0.25f;
+    public float countdownBeforeSneeze = 0.0f;
+    public bool beforSneeze = false;
+
     private float m_sneezeCounter;
     public UI_CharacterArrow m_characterArrow;
     public Rigidbody rigidbodyChara;
@@ -42,6 +47,8 @@ public class CharacterSneeze : MonoBehaviour
     public bool IsSneezeInputPress;
     [Header("Info Sneeze")]
     [SerializeField] private bool m_isAllowRandomSneeze  = true;
+
+  public System.Action<float> m_sneezeEvent;
 
     public void Start()
     {
@@ -117,18 +124,38 @@ public class CharacterSneeze : MonoBehaviour
     public void CallSneeze()
     {
         if (!m_characterGeneral.IsOnGround()) return;
+
+        m_sneezeEvent.Invoke(m_currentSneezePower / maxPowerSneeze);
         currentForce = currentDirection.normalized * m_currentSneezePower;
         m_currentSneezePower = 0.0f;
         m_currentSneezePowerTimer = 0.0f;
-        rigidbodyChara.AddForce(currentForce, ForceMode.Impulse);
+        StartCoroutine(LaunchSneeze(currentForce));
     }
 
     public void CallSneeze(Vector3 direction)
     {
         if (!m_characterGeneral.IsOnGround()) return;
+        m_sneezeEvent.Invoke(m_currentSneezePower / maxPowerSneeze);
+
         currentForce = direction.normalized * m_currentSneezePower;
-        rigidbodyChara.AddForce(currentForce, ForceMode.Impulse);
+        StartCoroutine(LaunchSneeze(currentForce));
     }
+
+
+    public IEnumerator LaunchSneeze(Vector3 dir)
+    {
+        countdownBeforeSneeze = 0;
+        beforSneeze = true;
+        while (countdownBeforeSneeze < timeBeforSneeze)
+        {
+            yield return Time.deltaTime;
+            countdownBeforeSneeze += Time.deltaTime;
+        }
+
+        rigidbodyChara.AddForce(dir, ForceMode.Impulse);
+        beforSneeze = false;
+    }
+
 
     public void Update()    
     {
