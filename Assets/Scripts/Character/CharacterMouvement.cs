@@ -54,7 +54,7 @@ public class CharacterMouvement : MonoBehaviour
 
 
 
-    public void UpdateAirMovement(float acceleration, float maxSpeed)
+    public void UpdateAirMovement(float acceleration, float maxSpeed,float ratio)
     {
         if (m_movementInputValue.x == 0  || m_characterSneeze.IsSneezeInputPress)
         {
@@ -77,12 +77,13 @@ public class CharacterMouvement : MonoBehaviour
         m_currentSpeed.y = 0;
         m_currentSpeed.z = 0;
 
-        m_currentSpeed.x = Mathf.Clamp(m_currentSpeed.x, 0, maxRunSpeed);
+        m_currentSpeed.x = Mathf.Clamp(m_currentSpeed.x, 0, maxSpeed);
 
-        m_rigidbody.AddForce(m_movementSign * m_currentSpeed, ForceMode.Impulse);
-        Vector3 speed = new Vector3(m_rigidbody.velocity.x, 0, m_rigidbody.velocity.z);
-        speed = Vector3.ClampMagnitude(speed, maxSpeed);
-        m_rigidbody.velocity = new Vector3(speed.x, m_rigidbody.velocity.y, speed.z);
+        m_rigidbody.AddForce(m_movementSign * m_currentSpeed * ratio, ForceMode.Force);
+     //    transform.position += m_movementSign * m_currentSpeed *ratio * Time.deltaTime;
+        //Vector3 speed = new Vector3(m_rigidbody.velocity.x, 0, m_rigidbody.velocity.z);
+        //speed = Vector3.ClampMagnitude(speed, maxSpeed);
+        //m_rigidbody.velocity = new Vector3(speed.x, m_rigidbody.velocity.y, speed.z);
 
     }
 
@@ -109,14 +110,11 @@ public class CharacterMouvement : MonoBehaviour
         m_currentSpeed.y = 0;
         m_currentSpeed.z = 0;
 
-        m_currentSpeed.x = Mathf.Clamp(m_currentSpeed.x, 0, maxRunSpeed);
+        m_currentSpeed.x = Mathf.Clamp(m_currentSpeed.x, 0, maxSpeed);
 
 
         transform.position += m_movementSign * m_currentSpeed * Time.deltaTime;
-        //m_rigidbody.AddForce(m_movementSign * m_currentSpeed, ForceMode.Impulse);
-        //Vector3 speed = new Vector3(m_rigidbody.velocity.x, 0, m_rigidbody.velocity.z);
-        //speed = Vector3.ClampMagnitude(speed, maxSpeed);
-        //m_rigidbody.velocity = new Vector3(speed.x, m_rigidbody.velocity.y, speed.z);
+      
 
     }
 
@@ -131,8 +129,15 @@ public class CharacterMouvement : MonoBehaviour
       if(m_characterGeneral.IsOnGround()) 
             UpdateMouvement(accelerationRun,maxRunSpeed);
 
-        if (m_rigidbody.velocity.y < 0)
-            UpdateMouvement(accelerationAirControl, maxSpeedAirControl);
+        if (m_rigidbody.velocity.y < m_characterSneeze.maxPowerSneeze && !m_characterGeneral.IsOnGround())
+        {
+            float ratio = 1 - (m_rigidbody.velocity.magnitude / m_characterSneeze.maxPowerSneeze);
+            if (m_rigidbody.velocity.y < 0) 
+                ratio = 1;
+            UpdateAirMovement(accelerationAirControl, maxSpeedAirControl, ratio);
+        }
+
+          
     }
 
 
