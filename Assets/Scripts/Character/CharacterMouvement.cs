@@ -27,6 +27,11 @@ public class CharacterMouvement : MonoBehaviour
     private CharacterGeneral m_characterGeneral;
     private CharacterSneeze m_characterSneeze;
 
+
+    private Vector3 prevPos;
+    public GameObject meshChara;
+    public Animator m_meshAnimator;
+
     public void Start()
     {
         m_characterGeneral = GetComponent<CharacterGeneral>();
@@ -92,7 +97,9 @@ public class CharacterMouvement : MonoBehaviour
         if (m_movementInputValue.x == 0 || m_characterSneeze.IsSneezeInputPress)
         {
             m_currentSpeed.x -= deccelerationRun * Time.deltaTime;
-
+            m_meshAnimator.SetTrigger("Idle");
+            m_meshAnimator.ResetTrigger("Running");
+            m_meshAnimator.ResetTrigger("OnAir");
         }
         else
         {
@@ -104,6 +111,9 @@ public class CharacterMouvement : MonoBehaviour
             }
 
             m_currentSpeed.x += acceleration * Time.deltaTime;
+            m_meshAnimator.SetTrigger("Running");
+            m_meshAnimator.ResetTrigger("Idle");
+            m_meshAnimator.ResetTrigger("OnAir");
         }
 
 
@@ -114,7 +124,9 @@ public class CharacterMouvement : MonoBehaviour
 
 
         transform.position += m_movementSign * m_currentSpeed * Time.deltaTime;
-      
+
+        
+        
 
     }
 
@@ -137,7 +149,29 @@ public class CharacterMouvement : MonoBehaviour
             UpdateAirMovement(accelerationAirControl, maxSpeedAirControl, ratio);
         }
 
-          
+      
+    }
+
+
+    public void FixedUpdate()
+    {
+        if (m_characterGeneral.IsOnGround()  && !m_characterSneeze.beforSneeze|| m_rigidbody.velocity.y < 2 && !m_characterSneeze.beforSneeze )
+        {
+            float signFace = Mathf.Sign(transform.position.x - prevPos.x);
+            float angle = signFace == -1 ? -90 : 110;
+            meshChara.transform.rotation = Quaternion.Euler(0, angle, 0);
+            prevPos = transform.position;
+        }
+        else if(m_characterSneeze.beforSneeze)
+        {
+            float signFace = Mathf.Sign(m_characterSneeze.currentDirection.x);
+            float angle = signFace == -1 ? -90 : 110;
+            meshChara.transform.rotation = Quaternion.Euler(0, angle, 0);
+
+        }
+
+
+
     }
 
 
