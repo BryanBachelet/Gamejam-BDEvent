@@ -22,7 +22,12 @@ public class CharacterSneeze : MonoBehaviour
     public float m_currentSneezePower = 0.0f;
 
     [Header("Sneeze Sound")]
-    [SerializeField] private AudioSource m_sneezeSound;
+    [SerializeField] private MultiIntruments m_sneezeSound;
+    [SerializeField] private MultiIntruments m_preSneezeSound;
+    [SerializeField] private float m_timerToPreSneeze;
+    [SerializeField] private float m_coutdownToPreSneeze;
+
+    [SerializeField] private MultiIntruments m_preFinalSneezeSound;
 
 
     [Header("Sneeze Event")]
@@ -155,7 +160,7 @@ public class CharacterSneeze : MonoBehaviour
         m_meshAnimator.ResetTrigger("Running");
         countdownBeforeSneeze = 0;
         beforSneeze = true;
-        m_sneezeSound.Play();
+        m_sneezeSound.PlaySource();
         while (countdownBeforeSneeze < timeBeforSneeze)
         {
             yield return Time.deltaTime;
@@ -242,8 +247,21 @@ public class CharacterSneeze : MonoBehaviour
                 {
                     m_vfxSneezeLoading.SetActive(true);
                     m_vfxSneezeLoading.GetComponent<ParticleSystem>().Play();
+                    m_preFinalSneezeSound.PlaySource();
                 }
 
+            }
+            else
+            {
+                if (m_coutdownToPreSneeze > m_timerToPreSneeze)
+                {
+                    m_preSneezeSound.PlaySource();
+                    m_coutdownToPreSneeze = 0;
+                }
+                else
+                {
+                    m_coutdownToPreSneeze += Time.deltaTime;
+                }
             }
 
             if (m_vfxSneezeLoading.activeSelf)
@@ -252,10 +270,12 @@ public class CharacterSneeze : MonoBehaviour
 
                 ParticleSystem.EmissionModule em = m_vfxSneezeLoading.GetComponent<ParticleSystem>().emission;
                 em.rateOverTime = Mathf.Lerp(10, 200, ratioVFX);
-              
-            }
 
-                m_sneezeCounter += Time.deltaTime;
+            }
+           
+
+
+            m_sneezeCounter += Time.deltaTime;
         }
     }
 
