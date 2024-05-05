@@ -32,6 +32,9 @@ public class CharacterMouvement : MonoBehaviour
     public GameObject meshChara;
     public Animator m_meshAnimator;
 
+    public GameObject vfxWalkPollenGO;
+    public ParticleSystem vfxWalkWallGO;
+
     public void Start()
     {
         m_characterGeneral = GetComponent<CharacterGeneral>();
@@ -122,11 +125,10 @@ public class CharacterMouvement : MonoBehaviour
 
         m_currentSpeed.x = Mathf.Clamp(m_currentSpeed.x, 0, maxSpeed);
 
-
         transform.position += m_movementSign * m_currentSpeed * Time.deltaTime;
 
-        
-        
+        m_rigidbody.AddForce(m_movementSign * m_currentSpeed , ForceMode.Force);
+
 
     }
 
@@ -138,10 +140,18 @@ public class CharacterMouvement : MonoBehaviour
 
     public void Update()
     {
-      if(m_characterGeneral.IsOnGround()) 
-            UpdateMouvement(accelerationRun,maxRunSpeed);
+        if (m_characterGeneral.IsOnGround())
 
-        if (m_rigidbody.velocity.y < m_characterSneeze.maxPowerSneeze && !m_characterGeneral.IsOnGround())
+        {
+            vfxWalkPollenGO.SetActive(true);
+            UpdateMouvement(accelerationRun, maxRunSpeed);
+        }
+        else
+        {
+            vfxWalkPollenGO.SetActive(false);
+        }
+
+            if (m_rigidbody.velocity.y < m_characterSneeze.maxPowerSneeze && !m_characterGeneral.IsOnGround())
         {
             float ratio = 1 - (m_rigidbody.velocity.magnitude / m_characterSneeze.maxPowerSneeze);
             if (m_rigidbody.velocity.y < 0) 
@@ -170,8 +180,6 @@ public class CharacterMouvement : MonoBehaviour
 
         }
 
-
-
     }
 
 
@@ -183,5 +191,13 @@ public class CharacterMouvement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, m_movementSign * m_currentSpeed.normalized * stopDistance);
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(!m_characterGeneral.IsOnGround())
+        {
+            vfxWalkWallGO.Play();
+        }
     }
 }
