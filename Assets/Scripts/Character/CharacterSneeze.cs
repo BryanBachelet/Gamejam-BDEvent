@@ -20,7 +20,10 @@ public class CharacterSneeze : MonoBehaviour
 
     private float m_currentSneezePowerTimer = 0.0f;
     public float m_currentSneezePower = 0.0f;
-    
+
+    [Header("Sneeze Sound")]
+    [SerializeField] private AudioSource m_sneezeSound;
+
 
     [Header("Sneeze Event")]
     public float sneezeTimer;
@@ -146,6 +149,7 @@ public class CharacterSneeze : MonoBehaviour
     {
         countdownBeforeSneeze = 0;
         beforSneeze = true;
+        m_sneezeSound.Play();   
         while (countdownBeforeSneeze < timeBeforSneeze)
         {
             yield return Time.deltaTime;
@@ -154,6 +158,7 @@ public class CharacterSneeze : MonoBehaviour
 
         rigidbodyChara.AddForce(dir, ForceMode.Impulse);
         beforSneeze = false;
+      
     }
 
 
@@ -206,6 +211,7 @@ public class CharacterSneeze : MonoBehaviour
         if (!m_isAllowRandomSneeze || !m_characterGeneral.IsOnGround())
         {
             m_vfxSneezeLoading.SetActive(false);
+            m_sneezeCounter = sneezeTimer - 2;
             return;
         }
 

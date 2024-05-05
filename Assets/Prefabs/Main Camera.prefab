@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3409184640281075720}
   - component: {fileID: 7899961230878537092}
-  - component: {fileID: 7501814772653804129}
   - component: {fileID: 4220708218962366205}
   - component: {fileID: 6526247821655942922}
   - component: {fileID: 3799254419843134851}
@@ -87,14 +86,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &7501814772653804129
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435258271341438415}
-  m_Enabled: 1
 --- !u!114 &4220708218962366205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +103,11 @@ MonoBehaviour:
   mindistanceToTarget: 20
   maxDistanceTarget: 30
   triggerDistanceBox: 5
-  maxShakeDuration: 1
+  maxShakeDuration: 0.2
+  ratioSpeedDezoom: 0.5
+  airDezoomBonusDistance: 10
+  ratioSpeedZoom: 0.1
+  airZoomBonusDistance: 5
   cameraMovementTime: 1
   timer: 0
   m_activeDebug: 1
@@ -155,10 +150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d83d15ebfa45b749a7ee14cb6a13ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shakeAmount: 0.5
+  m_shakeAmount: 0.2
   m_shakeYaw: 5
   m_shakeRoll: 5
   m_shakePitch: 5
-  m_shakeOffsetX: 5
-  m_shakeOffsetY: 5
-  m_shakeOffsetZ: 5
+  m_shakeOffsetX: 1
+  m_shakeOffsetY: 1
+  m_shakeOffsetZ: 1
