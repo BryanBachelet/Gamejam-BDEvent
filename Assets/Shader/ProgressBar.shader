@@ -62,7 +62,7 @@ Shader "Unlit/ProgressBar"
             {
                 float4 transparent  = float4(0,0,0,0);
             	float4 col = tex2D(_MainTex, i.uv);
-                float colMask = col.x >0.4;
+                float colMask = col.x >0.1 || col.g > 0.1 || col.b > 0.1;
                 float4 colorMask = lerp(col,transparent,colMask);
 
                 float mask = i.uv.x < _Fill;
